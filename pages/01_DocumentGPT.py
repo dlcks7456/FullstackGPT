@@ -64,26 +64,9 @@ st.set_page_config(
     page_icon="📃",
 )
 
-st.title("Document GPT")
-
-st.markdown('''
-Welcome!
-            
-Use this chatbot to ask questions to an AI about your files!
-''')
-
-file = st.file_uploader(
-    "Upload a .txt .pdf or .docx file", 
-    type=["pdf", "txt", "docx"]
-)
-
-if file :
-    st.write(file)
-
+def embed_file(file) :
     file_content = file.read()
     file_path = f"./.cache/files/{file.name}"
-    st.write(file_content, file_path)
-
     with open(file_path, "wb") as f :
         f.write(file_content)
     
@@ -105,7 +88,22 @@ if file :
     vectorstore = FAISS.from_documents(docs, cached_embeddings)
     retriever = vectorstore.as_retriever()
 
-    docs = retriever.invoke("ministry of truth")
+    return retriever
 
-    st.write(docs)
+st.title("Document GPT")
 
+st.markdown('''
+Welcome!
+            
+Use this chatbot to ask questions to an AI about your files!
+''')
+
+file = st.file_uploader(
+    "Upload a .txt .pdf or .docx file", 
+    type=["pdf", "txt", "docx"]
+)
+
+if file :
+    retriever = embed_file(file)
+    s = retriever.invoke("winston")
+    s
