@@ -2,3 +2,8 @@ env/
 .env
 files/
 .cache/
+3_langchain.ipynb
+4_model_IO.ipynb
+5_memory.ipynb
+6_RAG.ipynb
+7_DocumentGPT.ipynb
