@@ -7,4 +7,4 @@ files/
 5_memory.ipynb
 6_RAG.ipynb
 7_DocumentGPT.ipynb
-.streamlit
+.streamlit/
